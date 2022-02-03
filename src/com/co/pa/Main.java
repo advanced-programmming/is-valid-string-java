@@ -1,6 +1,10 @@
 package com.co.pa;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /*
@@ -26,15 +30,20 @@ Tasks: 
 public class Main {
 
     public static void main(String[] args) {
-        String input  = "     ";
+        String input  = ""; // <- put your input here :)
         System.out.println(isValid(input));
     }
 
     public static boolean isValid(String input){
-        Set<Integer> counters = countCharacter(input); // a -> 3, b -> 2, c ->2
-        return validateCounters(counters); //result -> true
+        Set<Integer> counters = countCharacter(input);
+        return validateCounters(counters);
     }
 
+    /**
+     * Only validate the size when is minor or equal to 2, if the size > 2, is false per default.
+     * @param counters set
+     * @return boolean
+     */
     private static boolean validateCounters(Set<Integer> counters){
         boolean result = false;
         if (counters.size() == 2){
@@ -53,9 +62,9 @@ public class Main {
             char c = input.charAt(i);
             if(result.containsKey(c)) result.put(c, (result.get(c) + 1));
             else result.put(c, 1);
-        }
+        } // with this counts character for storage in map
 
-        setResult.addAll(result.values());
+        setResult.addAll(result.values()); // send all values to set (TreeSet) to arrange the values, y delete duplicates.
         return setResult;
 
     }
